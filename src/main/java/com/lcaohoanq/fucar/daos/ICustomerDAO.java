@@ -9,4 +9,5 @@ public interface ICustomerDAO {
     void delete(Integer id);
     void update(Customer customer);
     Customer findById(Integer id);
+    List<Customer> findAllWithAccounts();
 }

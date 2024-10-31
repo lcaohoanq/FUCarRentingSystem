@@ -161,6 +161,14 @@
     <build>
         <resources>
             <resource>
+                <directory>src/main/resources/com/lcaohoanq/fucar/fxml</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**.fxml</include>
+                </includes>
+                <targetPath>${project.build.outputDirectory}/com/lcaohoanq/fucar/fxml</targetPath>
+            </resource>
+            <resource>
                 <directory>src/main/resources/</directory>
                 <filtering>false</filtering>
                 <includes>
@@ -183,7 +191,7 @@
                     <include>**.png</include>
                     <include>**.jpg</include>
                 </includes>
-                <targetPath>${project.build.outputDirectory}/assets/img</targetPath>
+                <targetPath>${project.build.outputDirectory}/com/lcaohoanq/fucar/assets/img</targetPath>
             </resource>
             <resource>
                 <directory>src/main/resources/com/lcaohoanq/fucar/assets/sound</directory>
@@ -191,7 +199,15 @@
                 <includes>
                     <include>**.wav</include>
                 </includes>
-                <targetPath>${project.build.outputDirectory}/assets/sound</targetPath>
+                <targetPath>${project.build.outputDirectory}/com/lcaohoanq/fucar/assets/sound</targetPath>
+            </resource>
+            <resource>
+                <directory>src/main/resources/com/lcaohoanq/fucar/assets/css</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**.css</include>
+                </includes>
+                <targetPath>${project.build.outputDirectory}/com/lcaohoanq/fucar/assets/css</targetPath>
             </resource>
             <resource>
                 <directory>src/main/resources/com/lcaohoanq/fucar/templates/email</directory>

@@ -97,4 +97,50 @@ public class CustomerDAO implements ICustomerDAO {
             session.close();
         }
     }
+
+    @Override
+    public List<Customer> findAllWithAccounts() {
+        Session session = sessionFactory.openSession();
+        try {
+            String hql = "SELECT DISTINCT c FROM Customer c LEFT JOIN FETCH c.account";
+            return session.createQuery(hql, Customer.class).list();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
+    public Customer findByIdWithAccount(Integer id) {
+        Session session = sessionFactory.openSession();
+        try {
+            String hql = "SELECT c FROM Customer c LEFT JOIN FETCH c.account WHERE c.customerId = :id";
+            return session.createQuery(hql, Customer.class)
+                .setParameter("id", id)
+                .uniqueResult();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
+    public Customer findByAccountName(String accountName) {
+        Session session = sessionFactory.openSession();
+        try {
+            String hql = "SELECT c FROM Customer c JOIN FETCH c.account a WHERE a.accountName = :accountName";
+            return session.createQuery(hql, Customer.class)
+                .setParameter("accountName", accountName)
+                .uniqueResult();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
+
 }

@@ -12,6 +12,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -43,7 +44,7 @@ public class Customer {
 
     @Column(name = "Birthday", nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date birthday;
+    private LocalDate birthday;
 
     @Column(name = "IdentityCard", nullable = false)
     private String identityCard;
@@ -53,7 +54,7 @@ public class Customer {
 
     @Column(name = "LicenceDate", nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date licenceDate;
+    private LocalDate licenceDate;
 
     @Column(name = "Email", nullable = false)
     private String email;

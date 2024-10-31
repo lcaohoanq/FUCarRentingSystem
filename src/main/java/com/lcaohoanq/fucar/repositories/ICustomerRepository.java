@@ -9,4 +9,5 @@ public interface ICustomerRepository {
     List<Customer> findAll();
     void delete(Integer id);
     void update(Customer customer);
+    List<Customer> findAllWithAccounts();
 }

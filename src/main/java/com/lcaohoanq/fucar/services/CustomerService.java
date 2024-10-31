@@ -29,6 +29,11 @@ public class CustomerService implements ICustomerService{
     }
 
     @Override
+    public void update(Customer customer) {
+        customerRepository.update(customer);
+    }
+
+    @Override
     public Customer findById(Integer id) {
         return customerRepository.findById(id);
     }
@@ -39,6 +44,11 @@ public class CustomerService implements ICustomerService{
         for (Customer c : customers) {
             System.out.println(c);
         }
+    }
+
+    @Override
+    public List<Customer> findAllWithAccounts() {
+        return customerRepository.findAllWithAccounts();
     }
 
 }

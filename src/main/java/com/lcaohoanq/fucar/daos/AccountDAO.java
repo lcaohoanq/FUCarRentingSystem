@@ -125,30 +125,23 @@ public class AccountDAO implements IAccountDAO {
 		return null;
 	}
 
-	@Override
-	public Account login(String email, String password) {
-//		Session session = sessionFactory.openSession();
-//		try {
-//			// Assuming password is already hashed before calling this method
-//			String hql = "FROM Account WHERE username = :email AND password = :password";
-//
-//			Account account = session.createQuery(hql, Account.class)
-//				.setParameter("email", email)
-//				.setParameter("password", password)
-//				.uniqueResult();  // Retrieve a single result
-//
-//			// If no account is found, return null
-//			if (account == null) {
-//				System.out.println("Invalid email or password.");
-//			}
-//			return account;
-//		} catch (Exception e) {
-//			throw e;
-//		} finally {
-//			session.close();
-//		}
-		return null;
-	}
+    @Override
+    public Account login(String accountName, String password) {
+        Session session = sessionFactory.openSession();
+        try {
+            String hql = "SELECT a FROM Account a JOIN FETCH a.customer c " +
+                "WHERE a.accountName = :accountName AND c.password = :password";
+            return session.createQuery(hql, Account.class)
+                .setParameter("accountName", accountName)
+                .setParameter("password", password)
+                .uniqueResult();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return null;
+        } finally {
+            session.close();
+        }
+    }
 
 	@Override
 	public void signup(Account newAccount) {
@@ -161,5 +154,33 @@ public class AccountDAO implements IAccountDAO {
 //		// Save the new account
 //		save(newAccount);
 	}
+
+    public List<Account> findAllWithCustomers() {
+        Session session = sessionFactory.openSession();
+        try {
+            String hql = "SELECT DISTINCT a FROM Account a LEFT JOIN FETCH a.customer";
+            return session.createQuery(hql, Account.class).list();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
+    public Account findByIdWithCustomer(Integer id) {
+        Session session = sessionFactory.openSession();
+        try {
+            String hql = "SELECT a FROM Account a LEFT JOIN FETCH a.customer WHERE a.accountID = :id";
+            return session.createQuery(hql, Account.class)
+                .setParameter("id", id)
+                .uniqueResult();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return null;
+        } finally {
+            session.close();
+        }
+    }
 
 }

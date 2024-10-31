@@ -7,5 +7,7 @@ public interface ICustomerService {
     void save(Customer customer);
     List<Customer> findAll();
     void delete(Integer id);
+    void update(Customer customer);
     Customer findById(Integer id);
+    List<Customer> findAllWithAccounts();
 }

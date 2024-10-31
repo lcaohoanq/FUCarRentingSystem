@@ -37,4 +37,9 @@ public class CustomerRepository implements ICustomerRepository {
     public void update(Customer customer) {
         customerDAO.update(customer);
     }
+
+    @Override
+    public List<Customer> findAllWithAccounts() {
+        return customerDAO.findAllWithAccounts();
+    }
 }
