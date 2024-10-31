@@ -49,8 +49,8 @@ public class AdminMainController implements Initializable, Navigable {
     }
 
     @FXML
-    private void navigateStaff() throws IOException {
-        navigateStaff(contentArea);
+    private void navigateUserManagement() throws IOException {
+        navigateUserManagement(contentArea);
     }
 
     @FXML

@@ -25,7 +25,7 @@
     <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
       text="Kois Management" onAction="#navigateKoi"/>
     <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
-      text="Staffs Management" onAction="#navigateStaff"/>
+      text="Users Management" onAction="#navigateUserManagement"/>
     <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
       text="Settings" onAction="#navigateSetting"/>
     <Button layoutX="10.0" layoutY="185.0" mnemonicParsing="false"

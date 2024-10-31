@@ -1,6 +1,12 @@
 package com.lcaohoanq.fucar.layouts;
 
 import com.lcaohoanq.fucar.constants.ResourcePaths;
+import com.lcaohoanq.fucar.controllers.MyProfileController;
+import com.lcaohoanq.fucar.controllers.UserManagementController;
+import com.lcaohoanq.fucar.services.AccountService;
+import com.lcaohoanq.fucar.services.CustomerService;
+import com.lcaohoanq.fucar.services.IAccountService;
+import com.lcaohoanq.fucar.services.ICustomerService;
 import com.lcaohoanq.fucar.utils.NavigateUtil;
 import java.io.IOException;
 import java.util.Objects;
@@ -68,41 +74,44 @@ public interface Navigable {
         setContent("login", contentArea);
     }
 
+    default void navigateUserManagement(StackPane contentArea) throws IOException{
+        setContent("user_management", contentArea);
+    }
+
     // Method to load and set the content in the provided contentArea
     default void setContent(String page, StackPane contentArea) throws IOException {
-        FXMLLoader loader = new FXMLLoader(
-            Objects.requireNonNull(
-                getClass().getResource(String.format(ResourcePaths.FXML_DIR, page))));
 
-        // preload on startup with initialize method
-        //preload data when customer login
-//        if (page.equals("tours_home_page")) {
-//            TourService tourService = new TourService(ResourcePaths.HIBERNATE_CONFIG);
-//            TourController tourController = new TourController(tourService);
-//            loader.setController(tourController);
-//        }
-//
-//        //tours_management
-//        if (page.equals("tours_management")) {
-//            TourService tourService = new TourService(ResourcePaths.HIBERNATE_CONFIG);
-//            TourManagementController tourManagementController = new TourManagementController(
-//                tourService);
-//            loader.setController(tourManagementController);
-//        }
-//
-//        //my_profile
-//        if (page.equals("my_profile")) {
-//            AccountService accountService = new AccountService(ResourcePaths.HIBERNATE_CONFIG);
-//            MyProfileController myProfileController = new MyProfileController(accountService);
-//            loader.setController(myProfileController);
-//        }
+        try{
+            String resources = String.format(ResourcePaths.FXML_DIR, page);
 
-        //preload data when admin login
+            System.out.println("Resources: " + resources);
 
-        //preload data when staff login
+            FXMLLoader loader = new FXMLLoader(
+                Objects.requireNonNull(
+                    getClass().getResource(resources)));
 
-        Node pageContent = loader.load();
-        contentArea.getChildren().clear();
-        contentArea.getChildren().add(pageContent);
+            Node pageContent = loader.load();
+
+            AccountService accountService = new AccountService(ResourcePaths.HIBERNATE_CONFIG);
+            CustomerService customerService = new CustomerService(ResourcePaths.HIBERNATE_CONFIG);
+            // preload on startup with initialize method
+
+            //my_profile
+            if (page.equals("my_profile")) {
+                MyProfileController myProfileController = new MyProfileController(accountService);
+                loader.setController(myProfileController);
+            }
+
+            //user_management
+            if(page.equals("user_management")){
+                UserManagementController controller = new UserManagementController();
+                loader.setController(controller); // manually set the controller
+            }
+
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(pageContent);
+        }catch (Exception e){
+            System.out.println("Error navigate, " + e.getMessage());
+        }
     }
 }

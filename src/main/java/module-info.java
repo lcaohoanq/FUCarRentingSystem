@@ -32,6 +32,8 @@ module com.lcaohoanq.fucar {
     opens com.lcaohoanq.fucar.layouts to javafx.fxml;
     exports com.lcaohoanq.fucar.layouts;
 
+    exports com.lcaohoanq to javafx.graphics;
+
 
     opens com.lcaohoanq.fucar.repositories to org.hibernate.orm.core;
     exports com.lcaohoanq.fucar.repositories;

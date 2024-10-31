@@ -1,8 +1,11 @@
 package com.lcaohoanq.fucar.controllers;
 
+import com.lcaohoanq.fucar.constants.ResourcePaths;
 import com.lcaohoanq.fucar.enums.ERole;
 import com.lcaohoanq.fucar.models.Account;
 import com.lcaohoanq.fucar.models.Customer;
+import com.lcaohoanq.fucar.services.AccountService;
+import com.lcaohoanq.fucar.services.CustomerService;
 import com.lcaohoanq.fucar.services.IAccountService;
 import com.lcaohoanq.fucar.services.ICustomerService;
 import com.lcaohoanq.fucar.utils.AlertHandler;
@@ -24,11 +27,15 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 public class UserManagementController implements Initializable {
 
-    private final IAccountService accountService;
-    private final ICustomerService customerService;
+    private IAccountService accountService;
+    private ICustomerService customerService;
     private final ObservableList<Customer> tableModel;
 
     @FXML private TextField txtCustomerId;
@@ -62,9 +69,9 @@ public class UserManagementController implements Initializable {
     @FXML private TableColumn<Customer, String> accountName;
     @FXML private TableColumn<Customer, ERole> role;
 
-    public UserManagementController(IAccountService accountService, ICustomerService customerService) {
-        this.accountService = accountService;
-        this.customerService = customerService;
+    public UserManagementController() {
+        this.accountService = new AccountService(ResourcePaths.HIBERNATE_CONFIG);
+        this.customerService = new CustomerService(ResourcePaths.HIBERNATE_CONFIG);
         // Get customers with their accounts
         tableModel = FXCollections.observableArrayList(customerService.findAllWithAccounts());
     }

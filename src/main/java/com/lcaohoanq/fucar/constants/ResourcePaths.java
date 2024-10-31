@@ -6,6 +6,7 @@ public class ResourcePaths {
     public static final String FXML_DIR = "/com/lcaohoanq/fucar/fxml/%s.fxml";
     public static final String LOGIN_VIEW = "/com/lcaohoanq/fucar/fxml/login.fxml";
     public static final String SIGNUP_VIEW = "/com/lcaohoanq/fucar/fxml/signup.fxml";
+    public static final String USER_MANAGEMENT_VIEW = "/com/lcaohoanq/fucar/fxml/user_management.fxml";
 
     //hibernate.cfg.xml
     public static final String HIBERNATE_CONFIG = "hibernate.cfg.xml";
