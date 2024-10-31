@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+  xmlns:fx="http://javafx.com/fxml"
+  fx:controller="com.lcaohoanq.fucar.controllers.CustomerManagement"
+  prefHeight="400.0" prefWidth="600.0">
+  <children>
+    <Label layoutX="201.0" prefHeight="100" prefWidth="238.0"
+      text="Student Management">
+      <font>
+        <Font size="24.0" />
+      </font>
+    </Label>
+    <Label layoutX="43.0" layoutY="98.0" text="StudentId" />
+    <TextField id="txtStudentId" fx:id="txtStudentId"
+      layoutX="125.0" layoutY="93.0" prefHeight="26.0" prefWidth="424.0" />
+    <Label layoutX="43.0" layoutY="141.0" text="First Name" />
+    <Label layoutX="44.0" layoutY="191.0" text="Last Name" />
+    <Label layoutX="55.0" layoutY="242.0" text="Mark" />
+    <TextField id="txtFirstName" fx:id="txtFirstName"
+      layoutX="125.0" layoutY="146.0" prefHeight="26.0" prefWidth="424.0" />
+    <TextField id="txtLastName" fx:id="txtLastName"
+      layoutX="125.0" layoutY="186.0" prefHeight="26.0" prefWidth="424.0" />
+    <TextField id="txtMark" fx:id="txtMark" layoutX="125.0"
+      layoutY="237.0" prefHeight="26.0" prefWidth="424.0" />
+    <TableView id="tblStudents" fx:id="tblStudents" layoutX="26.0" layoutY="304.0" prefHeight="200.0"
+      prefWidth="544.0">
+      <columns>
+        <TableColumn prefWidth="75.0" text="StudentID" fx:id="studentId"/>
+        <TableColumn prefWidth="75.0" text="First Name" fx:id="firstName"/>
+        <TableColumn prefWidth="75.0" text="Last Name" fx:id="lastName"/>
+        <TableColumn prefWidth="75.0" text="Mark" fx:id="mark"/>
+      </columns>
+    </TableView>
+    <Button id="btnAdd" fx:id="btnAdd" layoutX="23.0"
+      layoutY="544.0" mnemonicParsing="false" onAction="#btnAddOnAction"
+      prefHeight="46.0" prefWidth="125.0" text="Add" />
+    <Button id="btnUpdate" fx:id="btnUpdate" layoutX="170.0"
+      layoutY="544.0" mnemonicParsing="false" onAction="#btnUpdateOnAction"
+      prefHeight="46.0" prefWidth="125.0" text="Update" />
+    <Button id="btnDelete" fx:id="btnDelete" layoutX="314.0"
+      layoutY="544.0" mnemonicParsing="false" onAction="#btnDeleteOnAction"
+      prefHeight="46.0" prefWidth="125.0" text="Delete" />
+    <Button id="btnCancel" fx:id="btnCancel" layoutX="456.0"
+      layoutY="544.0" mnemonicParsing="false" onAction="#btnCancelOnAction"
+      prefHeight="46.0" prefWidth="125.0" text="Cancel" />
+  </children>
+</AnchorPane>

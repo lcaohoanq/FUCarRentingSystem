@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence" version="3.1">
+  <persistence-unit name="FUCarPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <class>com.lcaohoanq.fucar.models.Review</class>
+    <class>com.lcaohoanq.fucar.models.Customer</class>
+    <class>com.lcaohoanq.fucar.models.CarRental</class>
+    <class>com.lcaohoanq.fucar.models.Car</class>
+    <class>com.lcaohoanq.fucar.models.Account</class>
+    <class>com.lcaohoanq.fucar.models.CarProducer</class>
+    <properties>
+      <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+      <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;DatabaseName=FUCarRentingSystemDB;encrypt=true;trustServerCertificate=true;"/>
+      <property name="jakarta.persistence.jdbc.user" value="sa"/>
+      <property name="jakarta.persistence.jdbc.password" value="12345"/>
+      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+      <property name="hibernate.show_sql" value="true" />
+    </properties>
+  </persistence-unit>
+</persistence>
