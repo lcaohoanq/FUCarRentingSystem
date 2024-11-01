@@ -38,36 +38,62 @@ public class UserManagementController implements Initializable {
     private ICustomerService customerService;
     private final ObservableList<Customer> tableModel;
 
-    @FXML private TextField txtCustomerId;
-    @FXML private TextField txtCustomerName;
-    @FXML private TextField txtMobile;
-    @FXML private DatePicker dpBirthday;
-    @FXML private TextField txtIdentityCard;
-    @FXML private TextField txtLicenceNumber;
-    @FXML private DatePicker dpLicenceDate;
-    @FXML private TextField txtEmail;
-    @FXML private PasswordField txtPassword;
+    @FXML
+    private TextField txtCustomerId;
+    @FXML
+    private TextField txtCustomerName;
+    @FXML
+    private TextField txtMobile;
+    @FXML
+    private DatePicker dpBirthday;
+    @FXML
+    private TextField txtIdentityCard;
+    @FXML
+    private TextField txtLicenceNumber;
+    @FXML
+    private DatePicker dpLicenceDate;
+    @FXML
+    private TextField txtEmail;
+    @FXML
+    private PasswordField txtPassword;
 
     // Account fields
-    @FXML private TextField txtAccountName;
-    @FXML private ComboBox<ERole> cbRole;
+    @FXML
+    private TextField txtAccountName;
+    @FXML
+    private ComboBox<ERole> cbRole;
 
-    @FXML private Button btnAdd;
-    @FXML private Button btnUpdate;
-    @FXML private Button btnDelete;
-    @FXML private Button btnCancel;
+    @FXML
+    private Button btnAdd;
+    @FXML
+    private Button btnUpdate;
+    @FXML
+    private Button btnDelete;
+    @FXML
+    private Button btnCancel;
 
-    @FXML private TableView<Customer> tblUsers;
-    @FXML private TableColumn<Customer, Integer> customerId;
-    @FXML private TableColumn<Customer, String> customerName;
-    @FXML private TableColumn<Customer, String> mobile;
-    @FXML private TableColumn<Customer, LocalDate> birthday;
-    @FXML private TableColumn<Customer, String> identityCard;
-    @FXML private TableColumn<Customer, String> licenceNumber;
-    @FXML private TableColumn<Customer, LocalDate> licenceDate;
-    @FXML private TableColumn<Customer, String> email;
-    @FXML private TableColumn<Customer, String> accountName;
-    @FXML private TableColumn<Customer, ERole> role;
+    @FXML
+    private TableView<Customer> tblUsers;
+    @FXML
+    private TableColumn<Customer, Integer> customerId;
+    @FXML
+    private TableColumn<Customer, String> customerName;
+    @FXML
+    private TableColumn<Customer, String> mobile;
+    @FXML
+    private TableColumn<Customer, LocalDate> birthday;
+    @FXML
+    private TableColumn<Customer, String> identityCard;
+    @FXML
+    private TableColumn<Customer, String> licenceNumber;
+    @FXML
+    private TableColumn<Customer, LocalDate> licenceDate;
+    @FXML
+    private TableColumn<Customer, String> email;
+    @FXML
+    private TableColumn<Customer, String> accountName;
+    @FXML
+    private TableColumn<Customer, ERole> role;
 
     public UserManagementController() {
         this.accountService = new AccountService(ResourcePaths.HIBERNATE_CONFIG);
@@ -82,12 +108,13 @@ public class UserManagementController implements Initializable {
         initializeRoleComboBox();
         tblUsers.setItems(tableModel);
 
-        tblUsers.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                showUserData(newValue);
-                txtCustomerId.setEditable(false);
-            }
-        });
+        tblUsers.getSelectionModel().selectedItemProperty()
+            .addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    showUserData(newValue);
+                    txtCustomerId.setEditable(false);
+                }
+            });
     }
 
     private void initializeTableColumns() {
@@ -100,9 +127,11 @@ public class UserManagementController implements Initializable {
         licenceDate.setCellValueFactory(new PropertyValueFactory<>("licenceDate"));
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
         accountName.setCellValueFactory(cellData ->
-                                            new SimpleStringProperty(cellData.getValue().getAccount().getAccountName()));
+                                            new SimpleStringProperty(
+                                                cellData.getValue().getAccount().getAccountName()));
         role.setCellValueFactory(cellData ->
-                                     new SimpleObjectProperty<>(cellData.getValue().getAccount().getRole()));
+                                     new SimpleObjectProperty<>(
+                                         cellData.getValue().getAccount().getRole()));
     }
 
     private void initializeRoleComboBox() {
@@ -151,9 +180,19 @@ public class UserManagementController implements Initializable {
             if (customerService.findById(id) == null) {
                 throw new Exception("User not found with id: " + id);
             }
-            customerService.delete(id);
-            refreshDataTable();
-            AlertHandler.showAlert("Success", "User deleted successfully.");
+
+            boolean confirmDelete = AlertHandler.showConfirmation("Confirm Deletion",
+                                                                  "Are you sure you want to delete the car with ID "
+                                                                      + id + "?");
+
+            if (confirmDelete) {
+                customerService.delete(id);
+                refreshDataTable();
+                AlertHandler.showAlert("Success", "User deleted successfully.");
+            } else {
+                System.out.println("Deletion cancelled.");
+            }
+
         } catch (Exception e) {
             AlertHandler.showAlert("Error", e.getMessage());
         }

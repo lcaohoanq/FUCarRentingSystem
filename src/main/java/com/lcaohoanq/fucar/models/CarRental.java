@@ -14,6 +14,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,11 +46,11 @@ public class CarRental {
 
     @Column(name = "PickupDate", nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date pickupDate;
+    private LocalDate pickupDate;
 
     @Column(name = "ReturnDate", nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date returnDate;
+    private LocalDate returnDate;
 
     @Column(name = "RentPrice", nullable = false)
     private BigDecimal rentPrice;

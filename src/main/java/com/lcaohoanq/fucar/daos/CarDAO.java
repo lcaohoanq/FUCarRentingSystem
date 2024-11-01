@@ -1,9 +1,9 @@
 package com.lcaohoanq.fucar.daos;
 
-import com.lcaohoanq.fucar.models.Account;
 import com.lcaohoanq.fucar.models.Car;
 import com.lcaohoanq.fucar.models.Customer;
 import java.util.List;
+import java.util.Optional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -53,19 +53,24 @@ public class CarDAO implements ICarDAO {
     public void delete(Integer id) {
         Session session = sessionFactory.openSession();
         Transaction t = null;
-        try (session) {
-            t = session.getTransaction();
-            t.begin();
-            Account account = session.get(Account.class, id);
-            session.remove(account);
+        try {
+            t = session.beginTransaction();
+            Car car = session.get(Car.class, id);
+            if (car != null) {
+                session.remove(car);
+                System.out.println("Successfully Deleted");
+            } else {
+                System.out.println("Car not found for ID: " + id);
+            }
             t.commit();
-            System.out.println("Successfully Delete");
         } catch (Exception e) {
-            assert t != null;
-            t.rollback();
-            System.out.println("Error " + e.getMessage());
+            if (t != null) {
+                t.rollback();
+            }
+            System.out.println("Error during deletion: " + e.getMessage());
+        } finally {
+            session.close();
         }
-//			sessionFactory.close();
     }
 
     @Override
@@ -102,6 +107,36 @@ public class CarDAO implements ICarDAO {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             return null;
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public List<String> getAllCarNames() {
+        Session session = sessionFactory.openSession();
+        try {
+            String hql = "SELECT c.carName FROM Car c";
+            return session.createQuery(hql, String.class).list();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
+    @Override
+    public Optional<Car> findByCarName(String name) {
+        Session session = sessionFactory.openSession();
+        try {
+            String hql = "SELECT c FROM Car c WHERE c.carName = :name";
+            return session.createQuery(hql, Car.class)
+                    .setParameter("name", name)
+                    .uniqueResultOptional();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return Optional.empty();
         } finally {
             session.close();
         }

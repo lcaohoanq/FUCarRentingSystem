@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/22"
+  xmlns:fx="http://javafx.com/fxml/1"
+  fx:controller="com.lcaohoanq.fucar.controllers.RentalController">
+  <children>
+    <HBox prefHeight="100.0" prefWidth="1300.0">
+      <children>
+        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="128.0" prefWidth="1300.0"
+          text="Car Rental Service">
+          <font>
+            <Font size="36.0"/>
+          </font>
+        </Label>
+      </children>
+    </HBox>
+
+    <!-- Form Fields -->
+    <Label layoutX="33.0" layoutY="140.0" text="Customer">
+      <font>
+        <Font name="System Bold" size="14.0"/>
+      </font>
+    </Label>
+    <TextField fx:id="txtCustomerName" layoutX="152.0" layoutY="140.0" prefHeight="25.0"
+      prefWidth="200.0" editable="false" promptText="Customer name..."/>
+
+    <Label layoutX="33.0" layoutY="180.0" text="Car">
+      <font>
+        <Font name="System Bold" size="14.0"/>
+      </font>
+    </Label>
+    <ComboBox fx:id="cbCar" layoutX="152.0" layoutY="180.0" prefHeight="25.0" prefWidth="200.0"
+      promptText="Select car..."/>
+
+    <Label layoutX="32.0" layoutY="220.0" text="Pickup Date">
+      <font>
+        <Font name="System Bold" size="14.0"/>
+      </font>
+    </Label>
+    <DatePicker fx:id="dpPickupDate" layoutX="152.0" layoutY="220.0" prefHeight="25.0"
+      prefWidth="200.0"/>
+
+    <Label layoutX="32.0" layoutY="260.0" text="Return Date">
+      <font>
+        <Font name="System Bold" size="14.0"/>
+      </font>
+    </Label>
+    <DatePicker fx:id="dpReturnDate" layoutX="152.0" layoutY="260.0" prefHeight="25.0"
+      prefWidth="200.0"/>
+
+    <Label layoutX="32.0" layoutY="300.0" text="Rent Price">
+      <font>
+        <Font name="System Bold" size="14.0"/>
+      </font>
+    </Label>
+    <TextField fx:id="txtRentPrice" layoutX="152.0" layoutY="300.0" prefHeight="25.0"
+      prefWidth="200.0" editable="false"/>
+
+    <Label layoutX="32.0" layoutY="340.0" text="Total Cost">
+      <font>
+        <Font name="System Bold" size="14.0"/>
+      </font>
+    </Label>
+    <TextField fx:id="txtTotalCost" layoutX="152.0" layoutY="340.0" prefHeight="25.0"
+      prefWidth="200.0" editable="false"/>
+
+    <Label layoutX="32.0" layoutY="380.0" text="Status">
+      <font>
+        <Font name="System Bold" size="14.0"/>
+      </font>
+    </Label>
+    <ComboBox fx:id="cbStatus" layoutX="152.0" layoutY="380.0" prefWidth="200.0"
+      promptText="Select status..."/>
+
+    <!-- Buttons -->
+    <HBox layoutX="70.0" layoutY="450.0" spacing="10">
+      <children>
+        <Button fx:id="btnAdd" text="Add" prefWidth="80"/>
+        <Button fx:id="btnUpdate" text="Update" prefWidth="80"/>
+        <Button fx:id="btnCancel" text="Cancel" prefWidth="80"/>
+      </children>
+    </HBox>
+
+    <!-- Car Rentals Table -->
+    <TableView fx:id="tblCarRentals" layoutX="400.0" layoutY="140.0" prefHeight="350.0"
+      prefWidth="860.0">
+      <columns>
+        <TableColumn fx:id="id" prefWidth="50.0" text="ID"/>
+        <TableColumn fx:id="customerId" prefWidth="120.0" text="Customer"/>
+        <TableColumn fx:id="carId" prefWidth="120.0" text="Car"/>
+        <TableColumn fx:id="pickupDate" prefWidth="120.0" text="Pickup Date"/>
+        <TableColumn fx:id="returnDate" prefWidth="120.0" text="Return Date"/>
+        <TableColumn fx:id="rentPrice" prefWidth="120.0" text="Rent Price"/>
+        <TableColumn fx:id="status" prefWidth="120.0" text="Status"/>
+      </columns>
+    </TableView>
+  </children>
+</AnchorPane>

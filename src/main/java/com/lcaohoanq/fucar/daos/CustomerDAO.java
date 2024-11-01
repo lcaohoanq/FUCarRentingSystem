@@ -112,6 +112,7 @@ public class CustomerDAO implements ICustomerDAO {
         }
     }
 
+    @Override
     public Customer findByIdWithAccount(Integer id) {
         Session session = sessionFactory.openSession();
         try {
@@ -127,6 +128,7 @@ public class CustomerDAO implements ICustomerDAO {
         }
     }
 
+    @Override
     public Customer findByAccountName(String accountName) {
         Session session = sessionFactory.openSession();
         try {

@@ -1,9 +1,8 @@
 package com.lcaohoanq.fucar.repositories;
 
 import com.lcaohoanq.fucar.models.Car;
-import com.lcaohoanq.fucar.models.CarRental;
-import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface ICarRepository {
 
@@ -18,5 +17,9 @@ public interface ICarRepository {
     Car findById(Integer id);
 
     List<Car> findAllWithCarProducers();
+
+    List<String> getAllCarNames();
+
+    Optional<Car> findByCarName(String name);
 
 }

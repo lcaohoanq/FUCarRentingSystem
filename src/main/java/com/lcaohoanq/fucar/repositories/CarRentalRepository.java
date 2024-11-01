@@ -2,6 +2,7 @@ package com.lcaohoanq.fucar.repositories;
 
 import com.lcaohoanq.fucar.daos.CarRentalDAO;
 import com.lcaohoanq.fucar.daos.ICarRentalDAO;
+import com.lcaohoanq.fucar.models.Car;
 import com.lcaohoanq.fucar.models.CarRental;
 import java.time.LocalDate;
 import java.util.List;
@@ -42,5 +43,15 @@ public class CarRentalRepository implements ICarRentalRepository{
     @Override
     public void update(CarRental carRental) {
         carRentalDAO.update(carRental);
+    }
+
+	@Override
+	public boolean isCarExist(Car car) {
+		return carRentalDAO.isCarExist(car);
+	}
+
+    @Override
+    public List<CarRental> findAllByCustomerId(Integer customerId) {
+        return carRentalDAO.findAllByCustomerId(customerId);
     }
 }

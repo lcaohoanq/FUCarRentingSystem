@@ -3,8 +3,11 @@ package com.lcaohoanq.fucar.controllers;
 import com.lcaohoanq.fucar.constants.ResourcePaths;
 import com.lcaohoanq.fucar.layouts.Navigable;
 import com.lcaohoanq.fucar.models.Account;
+import com.lcaohoanq.fucar.models.Customer;
 import com.lcaohoanq.fucar.services.AccountService;
+import com.lcaohoanq.fucar.services.CustomerService;
 import com.lcaohoanq.fucar.services.IAccountService;
+import com.lcaohoanq.fucar.services.ICustomerService;
 import com.lcaohoanq.fucar.utils.AlertHandler;
 import com.lcaohoanq.fucar.utils.EnvUtils;
 import com.lcaohoanq.fucar.utils.NavigateUtil;
@@ -46,9 +49,11 @@ public class LoginController implements Navigable {
     private String password = "";
 
     @FXML
-    protected ImageView brandingImageView;
-    @FXML
     protected ImageView logoImageView;
+    @FXML
+    protected ImageView logoImageView2;
+    @FXML
+    protected ImageView logoImageView3;
     @FXML
     protected ImageView ggImageView;
     @FXML
@@ -57,26 +62,33 @@ public class LoginController implements Navigable {
     protected ImageView xImageView;
 
     public static Account account;
+    public static Customer customer;
 
     private final IAccountService accountService;
+    private final ICustomerService customerService;
 
-    public LoginController(AccountService accountService) {
-        this.accountService = accountService;
+    public LoginController() {
+        this.accountService = new AccountService(ResourcePaths.HIBERNATE_CONFIG);
+        this.customerService = new CustomerService(ResourcePaths.HIBERNATE_CONFIG);
     }
 
     @FXML
     public void initialize() {
 
-        Image brandingImage = new Image(
-            Objects.requireNonNull(
-                    getClass().getResource(ResourcePaths.BRAND_VIEW))
-                .toExternalForm());
-        brandingImageView.setImage(brandingImage);
-
         Image logoImage = new Image(
-            Objects.requireNonNull(getClass().getResource(ResourcePaths.CAR_VIEW))
+            Objects.requireNonNull(getClass().getResource(ResourcePaths.URL_M2))
                 .toExternalForm());
         logoImageView.setImage(logoImage);
+
+        Image logoImage2 = new Image(
+            Objects.requireNonNull(getClass().getResource(ResourcePaths.URL_RWB))
+                .toExternalForm());
+        logoImageView2.setImage(logoImage2);
+
+        Image logoImage3 = new Image(
+            Objects.requireNonNull(getClass().getResource(ResourcePaths.URL_FJCRUSER))
+                .toExternalForm());
+        logoImageView3.setImage(logoImage3);
 
         Image ggImage = new Image(
             Objects.requireNonNull(
@@ -122,6 +134,7 @@ public class LoginController implements Navigable {
 
     private void login(String username, String password) {
         account = accountService.login(username, password);
+        customer = customerService.findByIdWithAccount(account.getAccountID());
 
         if (account == null) {
             AlertHandler.showAlert("Login Failed", "Invalid email or password");
@@ -137,8 +150,8 @@ public class LoginController implements Navigable {
 
             NavigateUtil.navigateTo(
                 String.format(ResourcePaths.FXML_DIR, destinationPage),
-                loginButton, 930,
-                750
+                loginButton, 1500,
+                600
                 , "Car Renting");
         }
     }

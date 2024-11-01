@@ -42,4 +42,14 @@ public class CustomerRepository implements ICustomerRepository {
     public List<Customer> findAllWithAccounts() {
         return customerDAO.findAllWithAccounts();
     }
+
+    @Override
+    public Customer findByIdWithAccount(Integer id) {
+        return customerDAO.findByIdWithAccount(id);
+    }
+
+    @Override
+    public Customer findByAccountName(String accountName) {
+        return customerDAO.findByAccountName(accountName);
+    }
 }

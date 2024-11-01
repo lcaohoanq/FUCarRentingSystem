@@ -23,7 +23,7 @@ import lombok.ToString;
 @Builder
 @Entity
 @Table(name = "CarProducer")
-@ToString(exclude = {"cars"})
+//@ToString(exclude = {"cars"})
 public class CarProducer {
 
     @Id
@@ -42,4 +42,12 @@ public class CarProducer {
 
     @OneToMany(mappedBy = "producer", cascade = CascadeType.ALL)
     private List<Car> cars;
+
+	@Override
+	public String toString() {
+		return producerName;
+	}
+    
+    
+    
 }

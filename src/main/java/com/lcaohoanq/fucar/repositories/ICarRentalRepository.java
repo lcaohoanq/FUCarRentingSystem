@@ -1,5 +1,6 @@
 package com.lcaohoanq.fucar.repositories;
 
+import com.lcaohoanq.fucar.models.Car;
 import com.lcaohoanq.fucar.models.CarProducer;
 import com.lcaohoanq.fucar.models.CarRental;
 import java.time.LocalDate;
@@ -12,4 +13,6 @@ public interface ICarRentalRepository {
     void update(CarRental car);
     CarRental findById(Integer id);
     List<CarRental> findRentalsByDateRange(LocalDate startDate, LocalDate endDate);
+    boolean isCarExist(Car car);
+    List<CarRental> findAllByCustomerId(Integer customerId);
 }

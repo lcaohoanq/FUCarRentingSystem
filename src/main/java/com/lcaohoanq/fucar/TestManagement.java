@@ -1,4 +1,4 @@
-package com.lcaohoanq;
+package com.lcaohoanq.fucar;
 
 import com.lcaohoanq.fucar.constants.ResourcePaths;
 import com.lcaohoanq.fucar.controllers.UserManagementController;

@@ -16,16 +16,10 @@ public class MainController implements Initializable, Navigable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             // Set tours_home_page as the default content when the app starts
-            setContent("home", contentArea);
+            setContent("rental", contentArea);
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    // Handler for navigating to the Home page
-    @FXML
-    private void navigateHome() throws IOException {
-        navigateHome(contentArea);
     }
 
     @FXML
@@ -35,14 +29,14 @@ public class MainController implements Initializable, Navigable {
 
     // Handler for navigating to the Tours page
     @FXML
-    private void navigateTour() throws IOException {
-        navigateTourHomePage(contentArea);
+    private void navigateRental() throws IOException {
+        navigateRental(contentArea);
     }
 
     // Handler for navigating to the Bookings page
     @FXML
-    private void navigateBooking() throws IOException {
-        navigateBooking(contentArea);
+    private void navigateMyPurchase() throws IOException {
+        navigateMyPurchase(contentArea);
     }
 
     @FXML

@@ -10,4 +10,6 @@ public interface ICustomerDAO {
     void update(Customer customer);
     Customer findById(Integer id);
     List<Customer> findAllWithAccounts();
+    Customer findByIdWithAccount(Integer id);
+    Customer findByAccountName(String accountName);
 }

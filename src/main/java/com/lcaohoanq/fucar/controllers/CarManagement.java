@@ -1,12 +1,15 @@
 package com.lcaohoanq.fucar.controllers;
 
 import com.lcaohoanq.fucar.constants.ResourcePaths;
+import com.lcaohoanq.fucar.enums.ECarStatus;
 import com.lcaohoanq.fucar.models.Car;
 import com.lcaohoanq.fucar.models.CarProducer;
 import com.lcaohoanq.fucar.services.CarProducerService;
 import com.lcaohoanq.fucar.services.CarService;
 import com.lcaohoanq.fucar.services.ICarProducerService;
 import com.lcaohoanq.fucar.services.ICarService;
+import com.lcaohoanq.fucar.utils.AlertHandler;
+
 import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
@@ -39,7 +42,10 @@ public class CarManagement implements Initializable {
     @FXML private TextField txtCapacity;
     @FXML private TextField txtDescription;
     @FXML private DatePicker dpImportDate;
+    @FXML private TextField txtRentPrice;
+    @FXML private ComboBox<ECarStatus> cbStatus;
     @FXML private ComboBox<CarProducer> cbProducer;
+    
 
     @FXML private TableView<Car> tblCars;
     @FXML private TableColumn<Car, Integer> carId;
@@ -47,8 +53,9 @@ public class CarManagement implements Initializable {
     @FXML private TableColumn<Car, Integer> carModelYear;
     @FXML private TableColumn<Car, String> color;
     @FXML private TableColumn<Car, Integer> capacity;
-    @FXML private TableColumn<Car, String> description;
     @FXML private TableColumn<Car, LocalDate> importDate;
+    @FXML private TableColumn<Car, String> description;
+    @FXML private TableColumn<Car, ECarStatus> status;
     @FXML private TableColumn<Car, BigDecimal> rentPrice;
     @FXML private TableColumn<Car, String> producer;
 
@@ -76,14 +83,19 @@ public class CarManagement implements Initializable {
         // Populate producer combo box
         List<CarProducer> producers = carProducerService.findAll();
         cbProducer.setItems(FXCollections.observableArrayList(producers));
+        
+        cbStatus.setItems(FXCollections.observableArrayList(ECarStatus.values()));
 
         // Handle table row selection
         tblCars.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 showCarData(newValue);
-                txtCarID.setEditable(false); // Disable editing of the car ID
+                txtCarID.setManaged(false); //Not managed, not ocuppy space
+                txtCarID.setVisible(false); // Invisible of the car ID
             }
         });
+        
+        dpImportDate.setValue(LocalDate.now()); //ensure import day are calculate from now
     }
 
     private void initializeTableColumns() {
@@ -96,6 +108,7 @@ public class CarManagement implements Initializable {
         description.setCellValueFactory(new PropertyValueFactory<>("description"));
         importDate.setCellValueFactory(new PropertyValueFactory<>("importDate"));
         rentPrice.setCellValueFactory(new PropertyValueFactory<>("rentPrice"));
+        status.setCellValueFactory(new PropertyValueFactory<>("status"));
         producer.setCellValueFactory(cellData ->
                                          new SimpleStringProperty(cellData.getValue().getProducer().getProducerName())
         );
@@ -106,6 +119,9 @@ public class CarManagement implements Initializable {
         try {
             Car car = getCarFromInput();
             carService.save(car);
+            
+            AlertHandler.showAlert(null, "Add new car sucessfully");
+            
             refreshDataTable();
         } catch (Exception e) {
             // Handle alert logic here
@@ -122,7 +138,11 @@ public class CarManagement implements Initializable {
             }
             updateCarFromInput(existingCar);
             carService.update(existingCar);
+            
             refreshDataTable();
+
+            AlertHandler.showAlert(null, "Update sucessfully");
+            
         } catch (Exception e) {
             // Handle alert logic here
         }
@@ -135,12 +155,24 @@ public class CarManagement implements Initializable {
             if (carService.findById(id) == null) {
                 throw new Exception("Car not found with id: " + id);
             }
-            carService.delete(id);
-            refreshDataTable();
+
+            // Show confirmation dialog before deletion
+            boolean confirmDelete = AlertHandler.showConfirmation("Confirm Deletion", 
+                "Are you sure you want to delete the car with ID " + id + "?");
+
+            if (confirmDelete) {
+                carService.delete(id);
+                refreshDataTable();
+                AlertHandler.showAlert("Delete Successfully", null);
+            } else {
+                System.out.println("Deletion cancelled.");
+            }
+
         } catch (Exception e) {
-            // Handle alert logic here
+            System.out.println("Error when deleting car: " + e.getMessage());
         }
     }
+
 
     @FXML
     public void btnCancelOnAction() {
@@ -155,7 +187,9 @@ public class CarManagement implements Initializable {
             .color(txtColor.getText().trim())
             .capacity(Integer.parseInt(txtCapacity.getText().trim()))
             .description(txtDescription.getText().trim())
+            .rentPrice(new BigDecimal(txtRentPrice.getText()))
             .importDate(dpImportDate.getValue())
+            .status(cbStatus.getValue())
             .producer(cbProducer.getValue())
             .build();
     }
@@ -167,7 +201,9 @@ public class CarManagement implements Initializable {
         car.setColor(updatedCar.getColor());
         car.setCapacity(updatedCar.getCapacity());
         car.setDescription(updatedCar.getDescription());
+        car.setRentPrice(updatedCar.getRentPrice());
         car.setImportDate(updatedCar.getImportDate());
+        car.setStatus(updatedCar.getStatus());
         car.setProducer(updatedCar.getProducer());
     }
 
@@ -177,8 +213,10 @@ public class CarManagement implements Initializable {
         txtModelYear.setText(String.valueOf(car.getCarModelYear()));
         txtColor.setText(car.getColor());
         txtCapacity.setText(String.valueOf(car.getCapacity()));
+        txtRentPrice.setText(String.valueOf(car.getRentPrice()));
         txtDescription.setText(car.getDescription());
         dpImportDate.setValue(car.getImportDate());
+        cbStatus.setValue(car.getStatus());
         cbProducer.setValue(car.getProducer());
     }
 
@@ -194,8 +232,10 @@ public class CarManagement implements Initializable {
         txtModelYear.clear();
         txtColor.clear();
         txtCapacity.clear();
+        txtRentPrice.clear();
         txtDescription.clear();
         dpImportDate.setValue(null);
+        cbStatus.setValue(null);
         cbProducer.setValue(null);
     }
 
@@ -204,8 +244,10 @@ public class CarManagement implements Initializable {
             txtModelYear.getText().trim().isEmpty() ||
             txtColor.getText().trim().isEmpty() ||
             txtCapacity.getText().trim().isEmpty() ||
+            txtRentPrice.getText().trim().isEmpty() ||
             txtDescription.getText().trim().isEmpty() ||
             dpImportDate.getValue() == null ||
+            cbStatus.getValue() == null ||
             cbProducer.getValue() == null) {
             throw new Exception("All fields are required.");
         }

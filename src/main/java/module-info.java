@@ -27,13 +27,12 @@ module com.lcaohoanq.fucar {
     opens com.lcaohoanq.fucar.services to org.hibernate.orm.core;
     exports com.lcaohoanq.fucar.services;
 
+    opens com.lcaohoanq.fucar.views to javafx.graphics;
     exports com.lcaohoanq.fucar.views;
 
     opens com.lcaohoanq.fucar.layouts to javafx.fxml;
     exports com.lcaohoanq.fucar.layouts;
-
-    exports com.lcaohoanq to javafx.graphics;
-
+    
 
     opens com.lcaohoanq.fucar.repositories to org.hibernate.orm.core;
     exports com.lcaohoanq.fucar.repositories;

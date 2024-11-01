@@ -2,8 +2,10 @@ package com.lcaohoanq.fucar.controllers;
 
 import com.lcaohoanq.fucar.constants.ResourcePaths;
 import com.lcaohoanq.fucar.models.Account;
+import com.lcaohoanq.fucar.models.Customer;
 import com.lcaohoanq.fucar.services.AccountService;
 import com.lcaohoanq.fucar.services.IAccountService;
+import java.time.format.DateTimeFormatter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,19 +15,26 @@ import lombok.Setter;
 public class MyProfileController {
 
     @FXML
-    private Label firstNameLabel;
+    private Label labelTitle;
     @FXML
-    private Label lastNameLabel;
+    private Label identityCardLabel;
     @FXML
-    private Label usernameLabel;
+    private Label licenceNumberLabel;
+    @FXML
+    private Label fullNameLabel;
+    @FXML
+    private Label licenceDateLabel;
+    @FXML
+    private Label birthDayLabel;
+    @FXML
+    private Label emailLabel;
+    @FXML
+    private Label mobileLabel;
     @FXML
     private Label roleLabel;
-    @FXML
-    private Label passwordLabel;
+
     @FXML
     private Button editButton;
-    @FXML
-    private Button deleteButton;
 
     private Account existingAccount;
 
@@ -38,29 +47,28 @@ public class MyProfileController {
     @FXML
     public void initialize() {
         // Load a specific account (e.g., based on login or selection from another screen)
-        loadAccountProfile(LoginController.account); // For demo, loading the first account
+        loadAccountProfile(LoginController.customer); // For demo, loading the first account
     }
 
-    public void loadAccountProfile(Account account) {
+    public void loadAccountProfile(Customer customer) {
         // Set labels with account data
-        firstNameLabel.setText(account.getAccountName());
-        lastNameLabel.setText(account.getAccountName());
-//        usernameLabel.setText(account.getUsername());
-//        roleLabel.setText(account.getRole().name()); // Role is an enum, so get its name
-//        passwordLabel.setText(account.getPassword());
+        labelTitle.setText(String.format("Hello, %s have a nice day!", customer.getAccount().getAccountName()));
+        identityCardLabel.setText(customer.getIdentityCard());
+        licenceNumberLabel.setText(customer.getLicenceNumber());
+        fullNameLabel.setText(customer.getAccount().getAccountName());
+        licenceDateLabel.setText(customer.getLicenceDate().toString());
+        birthDayLabel.setText(customer.getBirthday().format(
+            DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        emailLabel.setText(customer.getEmail());
+        mobileLabel.setText(customer.getMobile());
+        roleLabel.setText(customer.getAccount().getRole().name()); // Role is an enum, so get its name
     }
 
     @FXML
     private void handleEditButtonAction() {
-//        // Logic for editing account profile
+        // Logic for editing account profile
 //        System.out.println("Editing account: " + selectedAccount.getUsername());
-//        // Implement edit logic here (e.g., open edit form or enable fields)
+        // Implement edit logic here (e.g., open edit form or enable fields)
     }
 
-    @FXML
-    private void handleDeleteButtonAction() {
-//        // Logic for deleting account profile
-//        System.out.println("Deleting account: " + selectedAccount.getUsername());
-//        // Implement delete logic here (e.g., confirmation dialog and delete from database)
-    }
 }

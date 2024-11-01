@@ -23,7 +23,7 @@ public class NavigateUtil {
 
             //Manually set the controller for the login page
             if(fxmlResource.equals(ResourcePaths.LOGIN_VIEW)){
-                loader.setController(new LoginController(new AccountService(ResourcePaths.HIBERNATE_CONFIG)));
+                loader.setController(new LoginController());
             }
 
             Parent root = loader.load();

@@ -29,7 +29,7 @@ import lombok.ToString;
 @Builder
 @Entity
 @Table(name = "Customer")
-@ToString(exclude = {"rentals", "reviews"})
+//@ToString(exclude = {"rentals", "reviews"})
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -70,4 +70,9 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer")
     private List<Review> reviews;
+
+    @Override
+    public String toString() {
+        return  String.valueOf(customerId);
+    }
 }

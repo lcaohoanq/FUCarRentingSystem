@@ -4,6 +4,7 @@ import com.lcaohoanq.fucar.daos.CarDAO;
 import com.lcaohoanq.fucar.daos.ICarDAO;
 import com.lcaohoanq.fucar.models.Car;
 import java.util.List;
+import java.util.Optional;
 
 public class CarRepository implements ICarRepository {
 
@@ -26,6 +27,16 @@ public class CarRepository implements ICarRepository {
     @Override
     public List<Car> findAllWithCarProducers() {
         return cardao.findAllWithCarProducers();
+    }
+
+    @Override
+    public List<String> getAllCarNames() {
+        return cardao.getAllCarNames();
+    }
+
+    @Override
+    public Optional<Car> findByCarName(String name) {
+        return cardao.findByCarName(name);
     }
 
     @Override

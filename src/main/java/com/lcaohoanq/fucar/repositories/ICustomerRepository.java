@@ -10,4 +10,6 @@ public interface ICustomerRepository {
     void delete(Integer id);
     void update(Customer customer);
     List<Customer> findAllWithAccounts();
+   Customer findByIdWithAccount(Integer id);
+Customer findByAccountName(String accountName);
 }

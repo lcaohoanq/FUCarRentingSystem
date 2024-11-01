@@ -16,7 +16,7 @@ public class AdminMainController implements Initializable, Navigable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             // Set tours_home_page as the default content when the app starts
-            setContent("home", contentArea);
+            setContent("car_management", contentArea);
         } catch (IOException e) {
             e.printStackTrace();
         }

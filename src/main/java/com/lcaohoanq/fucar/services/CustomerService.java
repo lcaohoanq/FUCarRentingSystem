@@ -51,4 +51,14 @@ public class CustomerService implements ICustomerService{
         return customerRepository.findAllWithAccounts();
     }
 
+    @Override
+    public Customer findByIdWithAccount(Integer id) {
+        return customerRepository.findByIdWithAccount(id);
+    }
+
+    @Override
+    public Customer findByAccountName(String accountName) {
+        return customerRepository.findByAccountName(accountName);
+    }
+
 }

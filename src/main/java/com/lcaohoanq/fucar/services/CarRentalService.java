@@ -1,5 +1,6 @@
 package com.lcaohoanq.fucar.services;
 
+import com.lcaohoanq.fucar.models.Car;
 import com.lcaohoanq.fucar.models.CarRental;
 import com.lcaohoanq.fucar.repositories.CarRentalRepository;
 import com.lcaohoanq.fucar.repositories.ICarRentalRepository;
@@ -42,5 +43,15 @@ public class CarRentalService implements ICarRentalService{
     @Override
     public List<CarRental> findRentalsByDateRange(LocalDate startDate, LocalDate endDate) {
         return carRentalRepository.findRentalsByDateRange(startDate, endDate);
+    }
+
+	@Override
+	public boolean isCarExist(Car car) {
+		return carRentalRepository.isCarExist(car);
+	}
+
+    @Override
+    public List<CarRental> findAllByCustomerId(Integer customerId) {
+        return carRentalRepository.findAllByCustomerId(customerId);
     }
 }

@@ -3,6 +3,8 @@ package com.lcaohoanq.fucar.layouts;
 import com.lcaohoanq.fucar.constants.ResourcePaths;
 import com.lcaohoanq.fucar.controllers.CarManagement;
 import com.lcaohoanq.fucar.controllers.MyProfileController;
+import com.lcaohoanq.fucar.controllers.MyPurchaseController;
+import com.lcaohoanq.fucar.controllers.RentalController;
 import com.lcaohoanq.fucar.controllers.RentingManagementController;
 import com.lcaohoanq.fucar.controllers.UserManagementController;
 import com.lcaohoanq.fucar.services.AccountService;
@@ -92,6 +94,16 @@ public interface Navigable {
         setContent("transaction_report", contentArea);
     }
 
+    //navigateMyPurchase
+    default void navigateMyPurchase(StackPane contentArea) throws IOException {
+        setContent("my_purchase", contentArea);
+    }
+
+    //navigateRental
+    default void navigateRental(StackPane contentArea) throws IOException {
+        setContent("rental", contentArea);
+    }
+
     // Method to load and set the content in the provided contentArea
     default void setContent(String page, StackPane contentArea) throws IOException {
 
@@ -112,7 +124,6 @@ public interface Navigable {
             //my_profile
             if (page.equals("my_profile")) {
                 MyProfileController myProfileController = new MyProfileController();
-                loader.setController(myProfileController);
             }
 
             //user_management
@@ -126,6 +137,14 @@ public interface Navigable {
 
             if(page.equals("renting_management")){
                 RentingManagementController controller = new RentingManagementController();
+            }
+
+            if(page.equals("my_purchase")){
+                 MyPurchaseController controller = new MyPurchaseController();
+            }
+
+            if(page.equals("rental")){
+                RentalController controller = new RentalController();
             }
 
             Node pageContent = loader.load();
