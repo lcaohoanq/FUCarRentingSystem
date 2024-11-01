@@ -13,4 +13,6 @@ public interface ICarService {
     void update(Car car);
 
     Car findById(Integer id);
+
+    List<Car> findAllWithCarProducers();
 }

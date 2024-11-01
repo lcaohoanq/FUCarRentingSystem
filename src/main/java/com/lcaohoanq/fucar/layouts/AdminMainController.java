@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.StackPane;
-import com.lcaohoanq.fucar.layouts.Navigable;
 
 public class AdminMainController implements Initializable, Navigable {
 
@@ -34,18 +33,18 @@ public class AdminMainController implements Initializable, Navigable {
     }
 
     @FXML
-    private void navigateTour() throws IOException {
-        navigateTourManagement(contentArea);
+    private void navigateCarManagement() throws IOException {
+        navigateCarManagement(contentArea);
     }
 
     @FXML
-    private void navigateBooking() throws IOException {
-        navigateBooking(contentArea);
+    private void navigateRentingManagement() throws IOException {
+        navigateRentingManagement(contentArea);
     }
 
     @FXML
-    private void navigateKoi() throws IOException {
-        navigateKoi(contentArea);
+    private void navigateTransactionReport() throws IOException {
+        navigateTransactionReport(contentArea);
     }
 
     @FXML
@@ -54,18 +53,8 @@ public class AdminMainController implements Initializable, Navigable {
     }
 
     @FXML
-    private void navigateSetting() throws IOException {
-        navigateSetting(contentArea);
-    }
-
-    @FXML
     private void navigateLogout() throws IOException {
         navigateLogout(contentArea);
-    }
-
-    @FXML
-    private void navigateFarm() throws IOException {
-        navigateFarm(contentArea);
     }
 
 }

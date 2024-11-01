@@ -2,6 +2,7 @@ package com.lcaohoanq.fucar.daos;
 
 import com.lcaohoanq.fucar.models.Account;
 import com.lcaohoanq.fucar.models.Car;
+import com.lcaohoanq.fucar.models.Customer;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -88,6 +89,21 @@ public class CarDAO implements ICarDAO {
     public Car findById(Integer id) {
         try (Session session = sessionFactory.openSession()) {
             return session.get(Car.class, id);
+        }
+    }
+
+
+    @Override
+    public List<Car> findAllWithCarProducers() {
+        Session session = sessionFactory.openSession();
+        try {
+            String hql = "SELECT DISTINCT c FROM Car c LEFT JOIN FETCH c.producer";
+            return session.createQuery(hql, Car.class).list();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return null;
+        } finally {
+            session.close();
         }
     }
 }

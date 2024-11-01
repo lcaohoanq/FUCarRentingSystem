@@ -24,6 +24,11 @@ public class CarRepository implements ICarRepository {
     }
 
     @Override
+    public List<Car> findAllWithCarProducers() {
+        return cardao.findAllWithCarProducers();
+    }
+
+    @Override
     public List<Car> findAll() {
         return cardao.findAll();
     }

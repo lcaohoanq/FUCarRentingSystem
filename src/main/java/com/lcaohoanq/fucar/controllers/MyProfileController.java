@@ -1,5 +1,6 @@
 package com.lcaohoanq.fucar.controllers;
 
+import com.lcaohoanq.fucar.constants.ResourcePaths;
 import com.lcaohoanq.fucar.models.Account;
 import com.lcaohoanq.fucar.services.AccountService;
 import com.lcaohoanq.fucar.services.IAccountService;
@@ -32,8 +33,8 @@ public class MyProfileController {
 
     private final IAccountService accountService;
 
-    public MyProfileController(AccountService accountService) {
-        this.accountService = accountService;
+    public MyProfileController() {
+        this.accountService = new AccountService(ResourcePaths.HIBERNATE_CONFIG);
     }
 
     @FXML

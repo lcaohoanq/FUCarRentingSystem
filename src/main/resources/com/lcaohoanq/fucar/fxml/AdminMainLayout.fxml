@@ -17,17 +17,13 @@
     <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
       text="My Profile" onAction="#navigateMyProfile"/>
     <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
-      text="Tours Management" onAction="#navigateTour"/>
-    <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
-      text="Bookings Management" onAction="#navigateBooking"/>
-    <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
-      text="Farms Management" onAction="#navigateFarm"/>
-    <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
-      text="Kois Management" onAction="#navigateKoi"/>
-    <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
       text="Users Management" onAction="#navigateUserManagement"/>
     <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
-      text="Settings" onAction="#navigateSetting"/>
+      text="Cars Management" onAction="#navigateCarManagement"/>
+    <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
+      text="Renting Management" onAction="#navigateRentingManagement"/>
+    <Button layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
+      text="Transaction Report" onAction="#navigateTransactionReport"/>
     <Button layoutX="10.0" layoutY="185.0" mnemonicParsing="false"
       style="-fx-background-color: red; -fx-text-fill: white;"
       text="Logout" onAction="#navigateLogout"/>

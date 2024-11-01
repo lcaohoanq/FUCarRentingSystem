@@ -1,6 +1,8 @@
 package com.lcaohoanq.fucar.services;
 
 import com.lcaohoanq.fucar.models.CarRental;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ICarRentalService {
@@ -9,4 +11,5 @@ public interface ICarRentalService {
     void delete(Integer id);
     void update(CarRental car);
     CarRental findById(Integer id);
+    List<CarRental> findRentalsByDateRange(LocalDate startDate, LocalDate endDate);
 }

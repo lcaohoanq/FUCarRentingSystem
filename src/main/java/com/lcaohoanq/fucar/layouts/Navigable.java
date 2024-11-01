@@ -1,7 +1,9 @@
 package com.lcaohoanq.fucar.layouts;
 
 import com.lcaohoanq.fucar.constants.ResourcePaths;
+import com.lcaohoanq.fucar.controllers.CarManagement;
 import com.lcaohoanq.fucar.controllers.MyProfileController;
+import com.lcaohoanq.fucar.controllers.RentingManagementController;
 import com.lcaohoanq.fucar.controllers.UserManagementController;
 import com.lcaohoanq.fucar.services.AccountService;
 import com.lcaohoanq.fucar.services.CustomerService;
@@ -78,6 +80,18 @@ public interface Navigable {
         setContent("user_management", contentArea);
     }
 
+    default void navigateCarManagement(StackPane contentArea) throws IOException {
+        setContent("car_management", contentArea);
+    }
+
+    default void navigateRentingManagement(StackPane contentArea) throws IOException {
+        setContent("renting_management", contentArea);
+    }
+
+    default void navigateTransactionReport(StackPane contentArea) throws IOException {
+        setContent("transaction_report", contentArea);
+    }
+
     // Method to load and set the content in the provided contentArea
     default void setContent(String page, StackPane contentArea) throws IOException {
 
@@ -98,14 +112,20 @@ public interface Navigable {
 
             //my_profile
             if (page.equals("my_profile")) {
-                MyProfileController myProfileController = new MyProfileController(accountService);
-                loader.setController(myProfileController);
+                MyProfileController myProfileController = new MyProfileController();
             }
 
             //user_management
             if(page.equals("user_management")){
                 UserManagementController controller = new UserManagementController();
-                loader.setController(controller); // manually set the controller
+            }
+
+            if(page.equals("car_management")){
+                CarManagement controller = new CarManagement();
+            }
+
+            if(page.equals("renting_management")){
+                RentingManagementController controller = new RentingManagementController();
             }
 
             contentArea.getChildren().clear();

@@ -15,6 +15,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -55,14 +56,14 @@ public class Car {
 
     @Column(name = "ImportDate", nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date importDate;
+    private LocalDate importDate;
+
+    @Column(name = "RentPrice", nullable = false)
+    private BigDecimal rentPrice;
 
     @ManyToOne
     @JoinColumn(name = "ProducerID", nullable = false)
     private CarProducer producer;
-
-    @Column(name = "RentPrice", nullable = false)
-    private BigDecimal rentPrice;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "Status", nullable = false)

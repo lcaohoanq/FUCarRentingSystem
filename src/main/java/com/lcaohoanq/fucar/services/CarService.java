@@ -37,4 +37,9 @@ public class CarService implements ICarService{
     public Car findById(Integer id) {
         return carRepository.findById(id);
     }
+
+    @Override
+    public List<Car> findAllWithCarProducers() {
+        return carRepository.findAllWithCarProducers();
+    }
 }

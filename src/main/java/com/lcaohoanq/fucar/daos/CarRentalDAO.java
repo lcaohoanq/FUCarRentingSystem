@@ -2,6 +2,9 @@ package com.lcaohoanq.fucar.daos;
 
 import com.lcaohoanq.fucar.models.Account;
 import com.lcaohoanq.fucar.models.CarRental;
+import jakarta.persistence.TypedQuery;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -89,5 +92,28 @@ public class CarRentalDAO implements ICarRentalDAO{
         try (Session session = sessionFactory.openSession()) {
             return session.get(CarRental.class, id);
         }
+    }
+
+    @Override
+    public List<CarRental> findRentalsByDateRange(LocalDate startDate, LocalDate endDate) {
+        List<CarRental> rentals;
+        try (Session session = sessionFactory.openSession()) {
+            // Convert LocalDate to java.sql.Date
+            Date startSqlDate = Date.valueOf(startDate);
+            Date endSqlDate = Date.valueOf(endDate);
+
+            // Create HQL query to find rentals within the date range
+            String hql = "FROM CarRental cr WHERE cr.pickupDate >= :startDate AND cr.returnDate <= :endDate";
+            TypedQuery<CarRental> query = session.createQuery(hql, CarRental.class);
+            query.setParameter("startDate", startSqlDate);
+            query.setParameter("endDate", endSqlDate);
+
+            // Execute the query and return the results
+            rentals = query.getResultList();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return null;
+        }
+        return rentals;
     }
 }

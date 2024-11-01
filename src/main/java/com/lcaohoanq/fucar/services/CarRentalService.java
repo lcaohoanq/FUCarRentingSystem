@@ -3,6 +3,7 @@ package com.lcaohoanq.fucar.services;
 import com.lcaohoanq.fucar.models.CarRental;
 import com.lcaohoanq.fucar.repositories.CarRentalRepository;
 import com.lcaohoanq.fucar.repositories.ICarRentalRepository;
+import java.time.LocalDate;
 import java.util.List;
 
 public class CarRentalService implements ICarRentalService{
@@ -36,5 +37,10 @@ public class CarRentalService implements ICarRentalService{
     @Override
     public CarRental findById(Integer id) {
         return carRentalRepository.findById(id);
+    }
+
+    @Override
+    public List<CarRental> findRentalsByDateRange(LocalDate startDate, LocalDate endDate) {
+        return carRentalRepository.findRentalsByDateRange(startDate, endDate);
     }
 }
