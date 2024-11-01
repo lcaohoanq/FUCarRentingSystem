@@ -29,8 +29,6 @@ public class MyProfileController {
 
     private Account existingAccount;
 
-    private Account selectedAccount; // Selected account to be displayed
-
     private final IAccountService accountService;
 
     public MyProfileController() {
@@ -44,8 +42,6 @@ public class MyProfileController {
     }
 
     public void loadAccountProfile(Account account) {
-        selectedAccount = account;
-
         // Set labels with account data
         firstNameLabel.setText(account.getAccountName());
         lastNameLabel.setText(account.getAccountName());

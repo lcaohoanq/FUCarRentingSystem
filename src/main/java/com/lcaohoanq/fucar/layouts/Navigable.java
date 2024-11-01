@@ -104,7 +104,6 @@ public interface Navigable {
                 Objects.requireNonNull(
                     getClass().getResource(resources)));
 
-            Node pageContent = loader.load();
 
             AccountService accountService = new AccountService(ResourcePaths.HIBERNATE_CONFIG);
             CustomerService customerService = new CustomerService(ResourcePaths.HIBERNATE_CONFIG);
@@ -113,6 +112,7 @@ public interface Navigable {
             //my_profile
             if (page.equals("my_profile")) {
                 MyProfileController myProfileController = new MyProfileController();
+                loader.setController(myProfileController);
             }
 
             //user_management
@@ -128,6 +128,7 @@ public interface Navigable {
                 RentingManagementController controller = new RentingManagementController();
             }
 
+            Node pageContent = loader.load();
             contentArea.getChildren().clear();
             contentArea.getChildren().add(pageContent);
         }catch (Exception e){

@@ -1,6 +1,7 @@
 package com.lcaohoanq.fucar.controllers;
 
 import com.lcaohoanq.fucar.constants.ResourcePaths;
+import com.lcaohoanq.fucar.models.Car;
 import com.lcaohoanq.fucar.models.CarRental;
 import com.lcaohoanq.fucar.services.ICarRentalService;
 import com.lcaohoanq.fucar.services.CarRentalService;
@@ -18,6 +19,7 @@ import java.util.List;
 public class TransactionReportController {
 
     private final ICarRentalService carRentalService;
+    private ObservableList<CarRental> tableModel;
 
     @FXML
     private DatePicker startDatePicker;
@@ -56,15 +58,43 @@ public class TransactionReportController {
     @FXML
     public void initialize() {
         // Set up table columns
+        initializeTableColumns();
+        refreshDataTable();
+
+//        reportTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+//            if (newSelection != null) {
+//                showReportData(newValue);
+//            }
+//        });
+
+        // Set button action
+        generateReportButton.setOnAction(event -> generateReport());
+    }
+
+//    private void showReportData(CarRental carRental) {
+//        // Display the selected car rental data in the input fields
+//        startDatePicker.setValue(carRental.getPickupDate());
+//        endDatePicker.setValue(carRental.getReturnDate());
+//    }
+
+    private void initializeTableColumns() {
         rentalIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         customerNameColumn.setCellValueFactory(new PropertyValueFactory<>("customer.name"));
         carNameColumn.setCellValueFactory(new PropertyValueFactory<>("car.name"));
         pickupDateColumn.setCellValueFactory(new PropertyValueFactory<>("pickupDate"));
         returnDateColumn.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
         rentPriceColumn.setCellValueFactory(new PropertyValueFactory<>("rentPrice"));
+    }
 
-        // Set button action
-        generateReportButton.setOnAction(event -> generateReport());
+    private void refreshDataTable() {
+        tableModel.setAll(carRentalService.findAll());
+        reportTable.setItems(tableModel);
+        clearInputFields();
+    }
+
+    private void clearInputFields() {
+        startDatePicker.setValue(null);
+        endDatePicker.setValue(null);
     }
 
     private void generateReport() {
