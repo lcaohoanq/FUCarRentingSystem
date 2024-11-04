@@ -13,6 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
@@ -31,7 +32,7 @@ import lombok.ToString;
 @Entity
 @Table(name = "CarRental")
 @ToString(exclude = {"customer", "car"})
-public class CarRental {
+public class CarRental implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

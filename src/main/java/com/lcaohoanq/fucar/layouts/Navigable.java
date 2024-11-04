@@ -6,6 +6,7 @@ import com.lcaohoanq.fucar.controllers.MyProfileController;
 import com.lcaohoanq.fucar.controllers.MyPurchaseController;
 import com.lcaohoanq.fucar.controllers.RentalController;
 import com.lcaohoanq.fucar.controllers.RentingManagementController;
+import com.lcaohoanq.fucar.controllers.TransactionReportController;
 import com.lcaohoanq.fucar.controllers.UserManagementController;
 import com.lcaohoanq.fucar.services.AccountService;
 import com.lcaohoanq.fucar.services.CustomerService;
@@ -145,6 +146,10 @@ public interface Navigable {
 
             if(page.equals("rental")){
                 RentalController controller = new RentalController();
+            }
+
+            if(page.equals("transaction_report")){
+                 TransactionReportController controller = new TransactionReportController();
             }
 
             Node pageContent = loader.load();

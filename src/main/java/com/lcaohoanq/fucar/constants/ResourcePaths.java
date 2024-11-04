@@ -8,9 +8,13 @@ public class ResourcePaths {
     public static final String SIGNUP_VIEW = "/com/lcaohoanq/fucar/fxml/signup.fxml";
     public static final String USER_MANAGEMENT_VIEW = "/com/lcaohoanq/fucar/fxml/user_management.fxml";
     public static final String SPLASH_SCREEN_VIEW = "/com/lcaohoanq/fucar/fxml/SplashScreen.fxml";
+    public static final String TRANSACTION_REPORT_VIEW = "/com/lcaohoanq/fucar/fxml/transaction_report.fxml";
 
     //hibernate.cfg.xml
     public static final String HIBERNATE_CONFIG = "hibernate.cfg.xml";
+
+    //report
+    public static final String TRANSACTION_REPORT_JSON = "src/main/resources/reports/transaction_report.json";
 
     // img
     public static final String URL_DOT = "/assets/img/dot.png";

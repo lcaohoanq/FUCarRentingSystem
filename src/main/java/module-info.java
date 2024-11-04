@@ -32,7 +32,9 @@ module com.lcaohoanq.fucar {
 
     opens com.lcaohoanq.fucar.layouts to javafx.fxml;
     exports com.lcaohoanq.fucar.layouts;
-    
+
+    opens com.lcaohoanq.fucar.dtos to com.fasterxml.jackson.databind;
+    exports com.lcaohoanq.fucar.dtos;
 
     opens com.lcaohoanq.fucar.repositories to org.hibernate.orm.core;
     exports com.lcaohoanq.fucar.repositories;
