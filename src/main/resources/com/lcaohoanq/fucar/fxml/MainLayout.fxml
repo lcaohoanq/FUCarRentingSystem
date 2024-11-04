@@ -13,23 +13,23 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="830.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lcaohoanq.fucar.layouts.MainController">
   <VBox alignment="CENTER" prefHeight="600.0" prefWidth="242.0" spacing="20.0" style="-fx-background-color: #A2B5BB;">
-      <HBox alignment="CENTER" prefHeight="59.0" prefWidth="225.0">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="117.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../assets/img/my_profile.png" />
+                  <Image url="@../assets/img/taxi.png" />
                </image>
             </ImageView>
-          <Button mnemonicParsing="false" onAction="#navigateMyProfile" style="-fx-background-color: transparent;" text="My Profile" textFill="WHITE">
-          <cursor>
-            <Cursor fx:constant="HAND" />
-          </cursor>
-          <effect>
-            <Glow />
-          </effect>
-          <font>
-            <Font size="15.0" />
-          </font>
+          <Button mnemonicParsing="false" onAction="#navigateRental" style="-fx-background-color: transparent;" text="Rental car" textFill="WHITE">
+            <cursor>
+              <Cursor fx:constant="HAND" />
+            </cursor>
+            <effect>
+              <Glow />
+            </effect>
+            <font>
+              <Font name="System Bold" size="15.0" />
+            </font>
           </Button>
          </children>
       </HBox>
@@ -48,28 +48,28 @@
             <Glow />
           </effect>
           <font>
-            <Font size="15.0" />
+            <Font name="System Bold" size="15.0" />
           </font>
           </Button>
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER" prefHeight="59.0" prefWidth="225.0">
          <children>
-            <ImageView fitHeight="117.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../assets/img/taxi.png" />
+                  <Image url="@../assets/img/my_profile.png" />
                </image>
             </ImageView>
-          <Button mnemonicParsing="false" onAction="#navigateRental" style="-fx-background-color: transparent;" text="Rental car" textFill="WHITE">
-            <cursor>
-              <Cursor fx:constant="HAND" />
-            </cursor>
-            <effect>
-              <Glow />
-            </effect>
-            <font>
-              <Font size="15.0" />
-            </font>
+          <Button mnemonicParsing="false" onAction="#navigateMyProfile" style="-fx-background-color: transparent;" text="My Profile" textFill="WHITE">
+          <cursor>
+            <Cursor fx:constant="HAND" />
+          </cursor>
+          <effect>
+            <Glow />
+          </effect>
+          <font>
+            <Font name="System Bold" size="15.0" />
+          </font>
           </Button>
          </children>
       </HBox>
@@ -78,7 +78,7 @@
         <Font size="15.0" />
       </font>
     </Button>
-      <AnchorPane prefHeight="60.0" prefWidth="242.0" />
+      <AnchorPane prefHeight="42.0" prefWidth="242.0" />
     <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
       <image>
         <Image url="@../assets/img/porsche-model.png" />
